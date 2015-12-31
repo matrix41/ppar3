@@ -122,6 +122,37 @@ $hash{plninsollim} = 'null';
 $hash{plnblend} = 'null';
 $hash{plnrefid} = 'null';
 
+# This @base_stem array keeps track of all the base parameter names 
+my @base_stem;
+push(@base_stem, "plnorbper");
+push(@base_stem, "plnorblper");
+push(@base_stem, "plnorbtper");
+push(@base_stem, "plnorbsmax");
+push(@base_stem, "plnorbincl");
+push(@base_stem, "plnorbeccen");
+push(@base_stem, "plnrvamp");
+push(@base_stem, "plnmsinij");
+push(@base_stem, "plnmsinie");
+push(@base_stem, "plnmassj");
+push(@base_stem, "plnmasse");
+push(@base_stem, "plnradj");
+push(@base_stem, "plnrade");
+push(@base_stem, "plndens");
+push(@base_stem, "plneqt");
+push(@base_stem, "plntrandep");
+push(@base_stem, "plntrandurd");
+push(@base_stem, "plntrandurh");
+push(@base_stem, "plntranmid");
+push(@base_stem, "plnimppar");
+push(@base_stem, "plnratdor");
+push(@base_stem, "plnratror");
+push(@base_stem, "plninsol");
+
+my @tertiary;
+push(@tertiary, "err1");
+push(@tertiary, "err2");
+push(@tertiary, "lim");
+
 
 # Step 2a of 3: Prompt the user to enter Object ID
 print 'Enter Object ID: ';
@@ -295,12 +326,30 @@ if ( $hash{ plntsystemref } =~ /^null$/ )
 
 
 # Step 3g of 3: Now output all the planet parameters 
-print     "EDMT|planet|$objectid|$addupdate|";
-print $fh "EDMT|planet|$objectid|$addupdate|";
-while ( my ($key, $value) = each(%hash) ) {
-    print     "$key $value|";
-    print $fh "$key $value|";
+print     "EDMT | planet | $objectid | $addupdate |\n";
+print $fh "EDMT | planet | $objectid | $addupdate |\n";
+foreach my $param (@base_stem) 
+{
+  if ( $hash{$param} !~ /null/ )
+  {
+    print "$param $hash{$param} | ";
+    foreach my $append (@tertiary)
+    {
+#     print "base_stem: $param $appendit\n";
+      my $fullname = "$param"."$append";
+#     print "fullname : $fullname  ";
+      print "$fullname $hash{$fullname} | ";
+    }
+    print "\n";
+  }
 }
+print     "plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |\n";
+print $fh "plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |\n";
+
+# while ( my ($key, $value) = each(%hash) ) {
+#     print     "$key $value|";
+#     print $fh "$key $value|";
+# }
 print     "\n"; # need to use this so the command prompt displays correctly 
 print $fh "\n"; # need to use this so the command prompt displays correctly
 
