@@ -328,33 +328,33 @@ if ( $hash{ plntsystemref } =~ /^null$/ )
 # Step 3g of 3: Now output all the planet parameters 
 print     "EDMT | planet | $objectid | $addupdate |\n";
 print $fh "EDMT | planet | $objectid | $addupdate |\n";
-foreach my $param (@base_stem) 
+# Step 3h of 3: The outer FOREACH loop iterates through all the base names 
+foreach my $base (@base_stem) 
 {
-  if ( $hash{$param} !~ /null/ )
+  if ( $hash{$base} !~ /null/ )
   {
-    print "$param $hash{$param} | ";
+    print     "$base $hash{$base} | ";
+    print $fh "$base $hash{$base} | ";
+# Step 3i of 3: The inner FOREACH loop will iterate through err1,err2,lim. 
     foreach my $append (@tertiary)
     {
 #     print "base_stem: $param $appendit\n";
-      my $fullname = "$param"."$append";
+      my $fullname = "$base"."$append";
 #     print "fullname : $fullname  ";
-      print "$fullname $hash{$fullname} | ";
+      print     "$fullname $hash{$fullname} | ";
+      print $fh "$fullname $hash{$fullname} | ";
     }
-    print "\n";
+    print     "\n";
+    print $fh "\n";
   }
 }
-print     "plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |\n";
-print $fh "plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |\n";
-
-# while ( my ($key, $value) = each(%hash) ) {
-#     print     "$key $value|";
-#     print $fh "$key $value|";
-# }
+print     "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |";
+print $fh "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |";
 print     "\n"; # need to use this so the command prompt displays correctly 
 print $fh "\n"; # need to use this so the command prompt displays correctly
 
 
-# Step 3h of 3: Print all the messages for the fields that were autofilled. 
+# Step 3j of 3: Print all the messages for the fields that were autofilled. 
 print "\n\n";
 for ( my $i = 0 ; $i <= $#messageArray ; $i++ )
 {
