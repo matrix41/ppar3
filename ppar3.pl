@@ -326,8 +326,10 @@ if ( $hash{ plntsystemref } =~ /^null$/ )
 
 
 # Step 3g of 3: Now output all the planet parameters 
-print     "EDMT | planet | $objectid | $addupdate |\n";
-print $fh "EDMT | planet | $objectid | $addupdate |\n";
+print     "EDMT | planet | $objectid | $addupdate | plnletter $hash{'plnletter'} |";
+print $fh "EDMT | planet | $objectid | $addupdate | plnletter $hash{'plnletter'} |";
+print     "\\\n";
+print $fh "\\\n";
 # Step 3h of 3: The outer FOREACH loop iterates through all the base names 
 foreach my $base (@base_stem) 
 {
@@ -341,15 +343,15 @@ foreach my $base (@base_stem)
 #     print "base_stem: $param $appendit\n";
       my $fullname = "$base"."$append";
 #     print "fullname : $fullname  ";
-      print     "$fullname $hash{$fullname} | ";
-      print $fh "$fullname $hash{$fullname} | ";
+      print     "$fullname $hash{$fullname} |";
+      print $fh "$fullname $hash{$fullname} |";
     }
-    print     "\n";
-    print $fh "\n";
+    print     "\\\n";
+    print $fh "\\\n";
   }
 }
-print     "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |";
-print $fh "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} |";
+print     "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} ";
+print $fh "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} ";
 print     "\n"; # need to use this so the command prompt displays correctly 
 print $fh "\n"; # need to use this so the command prompt displays correctly
 
