@@ -343,8 +343,8 @@ foreach my $base (@base_stem)
 #     print "base_stem: $param $appendit\n";
       my $fullname = "$base"."$append";
 #     print "fullname : $fullname  ";
-      print     "$fullname $hash{$fullname} |";
-      print $fh "$fullname $hash{$fullname} |";
+      print     "$fullname $hash{$fullname} | ";
+      print $fh "$fullname $hash{$fullname} | ";
     }
     print     "\\\n";
     print $fh "\\\n";
