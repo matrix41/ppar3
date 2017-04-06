@@ -9,6 +9,7 @@ my $inputkey;
 my $key;
 my $inputvalue;
 my $value;
+my $space;
 
 
 # Step 1 of 3: Initialize the hash and tie it (ie to preserve insertion order)
@@ -335,23 +336,43 @@ foreach my $base (@base_stem)
 {
   if ( $hash{$base} !~ /null/ )
   {
-    print     "$base $hash{$base} | ";
-    print $fh "$base $hash{$base} | ";
+    $space .= (" " x ( 25 - length("$base") - length($hash{$base}) ) ); 
+    print     "$base $space $hash{$base} |";
+    print $fh "$base $space $hash{$base} |";
+    $space = "";
 # Step 3i of 3: The inner FOREACH loop will iterate through err1,err2,lim. 
     foreach my $append (@tertiary)
     {
-#     print "base_stem: $param $appendit\n";
-      my $fullname = "$base"."$append";
-#     print "fullname : $fullname  ";
-      print     "$fullname $hash{$fullname} | ";
-      print $fh "$fullname $hash{$fullname} | ";
+        my $fullname = "$base"."$append";
+        $space .= (" " x ( 25 - length("$fullname") - length($hash{$fullname}) ) ); 
+        print     "$fullname $space $hash{$fullname} |";
+        print $fh "$fullname $space $hash{$fullname} |";
+        $space = "";
     }
     print     "\\\n";
     print $fh "\\\n";
   }
 }
-print     "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} ";
-print $fh "plntsystemref $hash{'plntsystemref'} | plnorbmethod $hash{'plnorbmethod'} | plnblend $hash{'plnblend'} | plnrefid $hash{'plnrefid'} ";
+$space .= (" " x ( 25 - length("plntsystemref") - length($hash{'plntsystemref'}) ) ); 
+print     "plntsystemref $space $hash{'plntsystemref'} |";
+print $fh "plntsystemref $space $hash{'plntsystemref'} |";
+$space = "";
+
+$space .= (" " x ( 25 - length("plnorbmethod") - length($hash{'plnorbmethod'}) ) ); 
+print     "plnorbmethod $space $hash{'plnorbmethod'} |";
+print $fh "plnorbmethod $space $hash{'plnorbmethod'} |";
+$space = "";
+
+$space .= (" " x ( 25 - length("plnblend") - length($hash{'plnblend'}) ) ); 
+print     "plnblend $space $hash{'plnblend'} |";
+print $fh "plnblend $space $hash{'plnblend'} |";
+$space = "";
+
+$space .= (" " x ( 25 - length("plnrefid") - length($hash{'plnrefid'}) ) ); 
+print     "plnrefid $space $hash{'plnrefid'} |";
+print $fh "plnrefid $space $hash{'plnrefid'} |";
+$space = "";
+
 print     "\n"; # need to use this so the command prompt displays correctly 
 print $fh "\n"; # need to use this so the command prompt displays correctly
 
