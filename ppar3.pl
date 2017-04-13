@@ -345,8 +345,8 @@ foreach my $base (@base_stem)
     {
         my $fullname = "$base"."$append";
         $space .= (" " x ( 25 - length("$fullname") - length($hash{$fullname}) ) ); 
-        print     "$fullname $space $hash{$fullname} |";
-        print $fh "$fullname $space $hash{$fullname} |";
+        print     " $fullname $space $hash{$fullname} |";
+        print $fh " $fullname $space $hash{$fullname} |";
         $space = "";
     }
     print     "\\\n";
